@@ -7,7 +7,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link href="grafikkart.css" rel="stylesheet" type="text/css">
 </head>
-<body><input type="text" class="alert-success" id="txt" placeholder="rastgele kişi sayısını yazınız."><button id="btn">Grafiği göster.</button><br/><p>Rastgele kişilerin yaş ve cinsiyet dağılımı grafiği</p>
+<body><input type="text" class="alert-success" id="txt" placeholder="rastgele kisi sayisini yaziniz."><button id="btn">Grafigi göster.</button><br/><p>Rastgele kisilerin yas ve cinsiyet dagilimi grafigi</p>
 <div style="background-color: pink;width: 10px;height: 10px"></div>bayan
 <div style="background-color: lightblue;width: 10px;height: 10px"></div>bay
 <p id="bay" style="float:bottom"></p>
@@ -77,8 +77,8 @@ $.ajax({
     }
     document.getElementById("bay").innerText="Bay : "+bay;
     document.getElementById("bayan").innerText="Bayan : "+(document.getElementById("txt").value-bay);
-    document.getElementById("ortalama").innerText="Yaş ortalaması : "+(toplam/document.getElementById("txt").value);
-    document.getElementById("aralik").innerText="Minimum yaş : "+min+", Maksimum yaş : "+max;
+    document.getElementById("ortalama").innerText="Yas ortalamasi : "+(toplam/document.getElementById("txt").value);
+    document.getElementById("aralik").innerText="Minimum yas : "+min+", Maksimum yas : "+max;
 
   },
   failure: function(data) {
