@@ -1,1 +1,4 @@
-<html>YAŞ GRAFİĞİ</html>
+<html>YAŞ GRAFİĞİ
+
+<?php header('location: yasgrafigi/yasGrafigi.html'); ?>
+</html>
