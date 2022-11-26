@@ -1,0 +1,57 @@
+.cizgi{
+display: inline-block;
+border-radius:5px;
+width:15px;
+margin:3px;
+float:left;
+}
+#grafik{
+transform: rotateX(150deg);
+float:left;
+/*bu özellik div genişliğini içindeki tüm elemenaların genişliği 
+toplamı kadar ayarlar*/
+display: flex;
+
+padding:10px;
+border:3px solid lightgreen;
+border-radius:12px;
+
+}
+.h100{
+background-color:lightgreen;
+width:6px;
+height:100px;
+float:left;
+position:relative;
+}
+.pp{
+transform: rotateX(150deg);
+height:2px;
+font-size:15px;
+}
+.dply{
+	display: none;
+	transform: rotateX(150deg);
+	background-color: aqua;
+	padding: 5px;
+
+	border-radius: 12px; 
+}
+.cizgi:hover .dply{
+	display: inline-block;
+}
+.cizgi .card{
+	display: none;
+	transform: rotateX(150deg);
+	margin-top: -450px;
+	
+}
+.cizgi:hover .card{
+	display: block;
+}
+body{
+	min-height: 3000px;
+}
+p{margin: 1px}
+
+

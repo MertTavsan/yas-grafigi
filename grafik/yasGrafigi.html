@@ -1,0 +1,93 @@
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link href="grafikkart.css" rel="stylesheet" type="text/css">
+</head>
+<body><input type="text" class="alert-success" id="txt" placeholder="rastgele kişi sayısını yazınız."><button id="btn">Grafiği göster.</button><br/><p>Rastgele kişilerin yaş ve cinsiyet dağılımı grafiği</p>
+<div style="background-color: pink;width: 10px;height: 10px"></div>bayan
+<div style="background-color: lightblue;width: 10px;height: 10px"></div>bay
+<p id="bay" style="float:bottom"></p>
+<span id="bayan" style="float:bottom"></span>
+<p id="ortalama" style="float:bottom"></p>
+<p id="aralik" style="float:bottom"></p>
+<div id="grafik" class="alert-success"></div>
+
+<script type="text/javascript" src="jquery.js"></script>
+
+<script>
+var kisiSayisi=10;
+kisiSayisi=document.getElementById("txt").value;
+document.getElementById("btn").onclick=function(){
+document.getElementById("grafik").innerHTML="";
+
+$.ajax({
+  url: 'https://randomuser.me/api/?results='+document.getElementById("txt").value ,
+  dataType: 'json',
+  success: function(data) {
+  	var toplam=0;
+  	var bay=0;
+  	var max=0;
+  	var min=120;
+    console.log(data);
+    for(var i=0; i<document.getElementById("txt").value; i++){
+      
+      console.log(data.results[i].dob.age);  
+      toplam+=data.results[i].dob.age; 
+      if(data.results[i].dob.age>max){
+      	max=data.results[i].dob.age;
+      }  
+      if(data.results[i].dob.age<min)
+      	min=data.results[i].dob.age;
+      var div=document.createElement("div");
+      $(div).css("height", data.results[i].dob.age+"px");
+      div.className="cizgi";
+      /*
+      var p=document.createElement("p");
+      p.className="pp";
+      p.innerText=data.results[i].dob.age;
+      div.appendChild(p);
+      var info=document.createElement("p");
+      info.className="dply";
+      info.innerText=data.results[i].name.first;
+      div.appendChild(info);
+      */
+      var foto=data.results[i].picture.large;
+      var ad=data.results[i].name.first+" "+data.results[i].name.last;
+      
+      var cinsiyet=data.results[i].gender;
+      var yas=data.results[i].dob.age;
+      var adres=data.results[i].location.street.name+" "+data.results[i].location.street.number;
+      var sehir=data.results[i].location.city;
+      var koordinat=data.results[i].location.coordinates.latitude+","+data.results[i].location.coordinates.longitude;
+      var ulke=data.results[i].location.country;
+      div.innerHTML+='<div class="card" style="width: 15rem;"><img class="card-img-top" src="'+foto+'"><div class="card-body"><h5 class="card-title">'+ad+'</h5><p class="card-text">Adres: <b>'+adres+'</b><br>Şehir: <b>'+sehir+'</b><br>Koordinat: <b>'+koordinat+'</b><br>Cinsiyet: <b>'+cinsiyet+'</b><br>Yaş: <b>'+yas+'</b><br>Ülke: <b>'+ulke+'</b></p></div></div>';
+
+      if(data.results[i].gender=="male"){
+      	 $(div).css("background-color", "lightblue");
+      	 bay++;
+      }
+      else{
+      	$(div).css("background-color", "pink");
+      } 	
+       document.getElementById("grafik").appendChild(div);
+    }
+    document.getElementById("bay").innerText="Bay : "+bay;
+    document.getElementById("bayan").innerText="Bayan : "+(document.getElementById("txt").value-bay);
+    document.getElementById("ortalama").innerText="Yaş ortalaması : "+(toplam/document.getElementById("txt").value);
+    document.getElementById("aralik").innerText="Minimum yaş : "+min+", Maksimum yaş : "+max;
+
+  },
+  failure: function(data) {
+        console.log(data);
+      },
+  error:function(error){
+    document.getElementById("txt").className="alert-danger";
+        document.getElementById("grafik").className="alert-danger";
+      },
+}).done(function(){});
+}
+</script></body></html>
